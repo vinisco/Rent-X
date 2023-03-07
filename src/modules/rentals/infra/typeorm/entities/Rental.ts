@@ -1,19 +1,31 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("categories")
-class Category {
+@Entity("rentals")
+class Rental {
   @PrimaryColumn()
   id?: string;
 
   @Column()
-  name: string;
+  car_id: string;
 
   @Column()
-  description: string;
+  user_id: string;
+
+  @Column()
+  start_date: Date;
+
+  @Column()
+  end_date: Date;
+
+  @Column()
+  expected_return_date: Date;
 
   @CreateDateColumn()
   created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 
   constructor() {
     if (!this.id) {
@@ -22,4 +34,4 @@ class Category {
   }
 }
 
-export { Category };
+export { Rental };
