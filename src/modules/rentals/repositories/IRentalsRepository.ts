@@ -3,7 +3,9 @@ import { Rental } from "../infra/typeorm/entities/Rental";
 
 interface IRentalsRepository {
   findOpenRentalByUserId(user_id: string): Promise<Rental>;
+  findByUserId(user_id: string): Promise<Rental[]>;
   findOpenRentalByCarId(car_id: string): Promise<Rental>;
+  findById(rental_id: string): Promise<Rental>;
   list(): Promise<Rental[]>;
   create({
     car_id,

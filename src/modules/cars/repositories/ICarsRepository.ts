@@ -13,6 +13,7 @@ interface ICarsRepository {
     category_id,
   }: IFindAvailableCarsDTO): Promise<Car[]>;
   create({ name, description }: ICreateCarDTO): Promise<Car>;
+  updateAvailable(id: string, available: boolean): Promise<void>;
 }
 
 export { ICarsRepository };

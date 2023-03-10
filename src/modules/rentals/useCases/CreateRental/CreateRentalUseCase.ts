@@ -4,6 +4,7 @@ import { AppError } from "@shared/errors/AppError";
 import { IRentalsRepository } from "../../repositories/IRentalsRepository";
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
+import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 
 interface IRequest {
   user_id: string;
@@ -18,6 +19,8 @@ class CreateRentalUseCase {
     private rentalsRepository: IRentalsRepository,
     @inject("DayjsDateProvider")
     private dateProvider: IDateProvider,
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository,
   ) {}
   async execute({
     expected_return_date,
@@ -48,7 +51,7 @@ class CreateRentalUseCase {
     );
 
     if (compare > minimumHour) {
-      throw new AppError("There maximum expected return date is 24 hours", 403);
+      throw new AppError("The maximum expected return date is 24 hours", 403);
     }
 
     const rental = await this.rentalsRepository.create({
@@ -56,6 +59,8 @@ class CreateRentalUseCase {
       user_id,
       car_id,
     });
+
+    await this.carsRepository.updateAvailable(car_id, false);
 
     return rental;
   }

@@ -9,11 +9,95 @@
     }
   },
   "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "security": [{ "bearerAuth": {} }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "driver_license": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "User sample",
+                "password": "Password sample",
+                "driver_license": "123123",
+                "email": "user@sample.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+
+    "/session": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Authenticate a user",
+        "description": "Authenticate a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "password": "admin",
+                  "email": "admin@rentx.com.br"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User Authenticate"
+          },
+          "400": {
+            "description": "Email or password incorrect"
+          }
+        }
+      }
+    },
+
     "/categories": {
       "post": {
         "tags": ["Category"],
         "summary": "Create a category",
         "description": "Create a new category",
+        "security": [{ "bearerAuth": {} }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -78,6 +162,7 @@
         "tags": ["Category"],
         "summary": "Upload a new category",
         "description": "Upload a new category",
+        "security": [{ "bearerAuth": {} }],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -106,6 +191,7 @@
         "tags": ["Specification"],
         "summary": "Create a specification",
         "description": "Create a new specification",
+        "security": [{ "bearerAuth": {} }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -165,11 +251,13 @@
         }
       }
     },
-    "/users": {
+
+    "/cars": {
       "post": {
-        "tags": ["User"],
-        "summary": "Create a user",
-        "description": "Create a new user",
+        "tags": ["Car"],
+        "summary": "Create a car",
+        "description": "Create a new car",
+        "security": [{ "bearerAuth": {} }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -179,22 +267,31 @@
                   "name": {
                     "type": "string"
                   },
-                  "password": {
+                  "daily_rate": {
+                    "type": "number"
+                  },
+                  "license_plate": {
                     "type": "string"
                   },
-                  "driver_license": {
+                  "fine_amount": {
+                    "type": "number"
+                  },
+                  "brand": {
                     "type": "string"
                   },
-                  "email": {
+                  "category_id": {
                     "type": "string"
                   }
                 }
               },
               "example": {
-                "name": "User sample",
-                "password": "Password sample",
-                "driver_license": "123123",
-                "email": "user@sample.com"
+                "name": "Car name sample",
+                "description": "Description sample",
+                "daily_rate": 100,
+                "license_plate": "License plate sample",
+                "fine_amount": 100,
+                "brand": "Brand sample",
+                "category_id": "category_id sample"
               }
             }
           }
@@ -204,45 +301,305 @@
             "description": "Created"
           },
           "500": {
-            "description": "User already exists"
+            "description": "Car already exists"
           }
         }
       }
     },
-    "/session": {
+    "/cars/available": {
+      "get": {
+        "tags": ["Car"],
+        "summary": "List available cars",
+        "description": "List all available cars",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "daily_rate": {
+                        "type": "number"
+                      },
+                      "license_plate": {
+                        "type": "string"
+                      },
+                      "fine_amount": {
+                        "type": "number"
+                      },
+                      "brand": {
+                        "type": "string"
+                      },
+                      "category_id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/specifications/{id}": {
       "post": {
-        "tags": ["User"],
-        "summary": "Authenticate a user",
-        "description": "Authenticate a user",
+        "tags": ["Car"],
+        "summary": "Post car specifications",
+        "description": "List all available cars",
+        "security": [{ "bearerAuth": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
+                  "specifications_id": {
+                    "type": "array"
                   }
-                },
-                "example": {
-                  "password": "Password sample",
-                  "email": "user@sample.com"
+                }
+              },
+              "example": {
+                "specifications_id": [
+                  "specification_id 1",
+                  "specification_id 2"
+                ]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "daily_rate": {
+                        "type": "number"
+                      },
+                      "license_plate": {
+                        "type": "string"
+                      },
+                      "fine_amount": {
+                        "type": "number"
+                      },
+                      "brand": {
+                        "type": "string"
+                      },
+                      "category_id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      },
+                      "specifications": {
+                        "type": "array"
+                      }
+                    }
+                  }
                 }
               }
             }
-          },
-          "responses": {
-            "201": {
-              "description": "User Authenticate"
+          }
+        }
+      }
+    },
+    "/cars/images/{id}": {
+      "post": {
+        "tags": ["Car"],
+        "summary": "Upload car images",
+        "description": "Upload car images",
+        "security": [{ "bearerAuth": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
             },
-            "500": {
-              "description": "Email or password incorrect"
+            "example": {
+              "specifications_id": ["specification_id 1", "specification_id 2"]
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+
+    "/rentals": {
+      "post": {
+        "tags": ["Rental"],
+        "summary": "Rent a car",
+        "description": "Rent a car",
+        "security": [{ "bearerAuth": {} }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expected_return_date": {
+                    "type": "Date"
+                  },
+                  "car_id": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "expected_return_date": "2022-03-10T15:00:24.295Z",
+                "car_id": "car_id sample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Car is unavailable / There maximum expected return date is 24 hours / There is a rental in progress for this user "
+          }
+        }
+      },
+      "get": {
+        "tags": ["Rental"],
+        "summary": "List rentals by user",
+        "description": "Rent a car",
+        "security": [{ "bearerAuth": {} }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "car_id": {
+                        "type": "string"
+                      },
+                      "user_id": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "type": "Date"
+                      },
+                      "end_date": {
+                        "type": "Date"
+                      },
+                      "total": {
+                        "type": "string"
+                      },
+                      "expected_return_date": {
+                        "type": "Date"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      },
+                      "updated_at": {
+                        "type": "array"
+                      },
+                      "car": {
+                        "type": ""
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
+      }
+    },
+    "/rentals/devolution/{id}": {
+      "post": {
+        "tags": ["Rental"],
+        "summary": "Rent a car",
+        "description": "Rent a car",
+        "security": [{ "bearerAuth": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Rental does not exist / This rental belongs to another user / Rental is already finished "
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
