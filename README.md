@@ -1,4 +1,4 @@
-<h1 align=center>Rent-X</h1>
+<h1 align=center>RentalX</h1>
 
 <p align=center>Car rental application built on <a href="https://www.rocketseat.com.br/" target="_blank">Ignite<a> - Node.js</p>
 
@@ -27,7 +27,7 @@ git clone https://github.com/vinisco/rocketseat-RentalX.git
 Go to the project directory
 
 ```bash
-cd trilha-ignite
+cd rocketseat-RentalX
 ```
 
 Install dependencies
