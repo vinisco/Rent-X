@@ -128,7 +128,7 @@ yarn typeorm migration:run
 ## Diagram
 
 <p align=center> 
-  <img width="95%" src="../../blob/master/diagram.png" >
+  <img width="95%" src="../../blob/master/diagrama.png" >
 </p>
 
 ## Authors
