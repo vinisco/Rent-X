@@ -53,11 +53,11 @@ yarn typeorm migration:run
 
 ## Car Registration
 
--It must be possible to register a new car.
+- It must be possible to register a new car.
 
--It must not be possible to register a car with an existing license plate.
--The car must be registered as available by default.
--The user responsible for the registration must be an administrator user.
+- It must not be possible to register a car with an existing license plate.
+- The car must be registered as available by default.
+- The user responsible for the registration must be an administrator user.
 
 ## Car Listing
 
