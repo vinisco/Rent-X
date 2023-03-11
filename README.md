@@ -1,4 +1,4 @@
-<h1 align=center>RentalX</h1>
+<h1 align=center>Rent-X</h1>
 
 <p align=center>Car rental application built on <a href="https://www.rocketseat.com.br/" target="_blank">Ignite<a> - Node.js</p>
 
@@ -21,13 +21,13 @@
 Clone the project
 
 ```bash
-git clone https://github.com/vinisco/rocketseat-RentalX.git
+git clone https://github.com/vinisco/Rent-X.git
 ```
 
 Go to the project directory
 
 ```bash
-cd rocketseat-RentalX
+cd Rent-X
 ```
 
 Install dependencies
