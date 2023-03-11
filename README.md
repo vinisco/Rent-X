@@ -17,7 +17,7 @@
   </a>
 </p>
   
-## Run Locally :computer:
+# Run Locally :computer:
 
 Clone the project
 
