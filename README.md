@@ -22,13 +22,13 @@
 Clone the project
 
 ```bash
-git clone https://github.com/vinisco/Rent-X.git
+git clone https://github.com/vinisco/rentex.git
 ```
 
 Go to the project directory
 
 ```bash
-cd Rent-X
+cd rentex
 ```
 
 Install dependencies
