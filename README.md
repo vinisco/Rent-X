@@ -16,7 +16,8 @@
     <img height="22px" src="https://img.shields.io/badge/license-MIT-green">
   </a>
 </p>
-  ## Run Locally :computer:
+  
+## Run Locally :computer:
 
 Clone the project
 
@@ -121,17 +122,17 @@ yarn typeorm migration:run
 - The user must provide a new password.
 - The link sent for recovery must expire in 3 hours.
 
-## Diagram
+# Diagram
 
 <p align=center> 
   <img width="95%" src="../../blob/master/diagrama.png" >
 </p>
 
-## Authors
+# Authors
 
 - [@vinisco](https://github.com/vinisco)
 - [@rocketseat-education](https://github.com/rocketseat-education)
 
-## License
+# License
 
 This project is [MIT](LICENSE) licensed.
