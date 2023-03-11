@@ -48,11 +48,7 @@ Run migrations to create tables
 yarn typeorm migration:run
 ```
 
-## Business rules
-
-<h1 align="center">Business rules</h1>
-
-<h1 align="center">Business rules</h1>
+# Business rules
 
 ## Car Registration
 
