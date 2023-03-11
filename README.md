@@ -66,9 +66,9 @@ yarn typeorm migration:run
 - It must be possible to list all available cars by brand name.
 - It must be possible to list all available cars by car name.
 
--The user does not need to be logged into the system.
+- The user does not need to be logged into the system.
 
-## 'Car Specification Registration
+## Car Specification Registration
 
 - It must be possible to register a specification for a car.
 
